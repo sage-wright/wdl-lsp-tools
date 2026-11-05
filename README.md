@@ -38,7 +38,7 @@ python3 wdl-lsp-tools.pyz sprocket-filtered analyzer --stdio
 
 ## Releasing
 
-Releases are built and published by GitHub Actions when a version tag is pushed. Update `__version__` in `src/wdl_lsp_tools/__init__.py`, then tag the commit with the same version (e.g. `v0.1.0`) and push the tag.
+Releases are built and published by GitHub Actions when a version tag is pushed. Update `__version__` in `src/wdl_lsp_tools/__init__.py`, then either push a tag with the same version (e.g. `v0.1.0`) or create a release with that tag on GitHub. The workflow publishes to PyPI and attaches the wheel, sdist, and `wdl-lsp-tools.pyz` to the release, creating the release if it doesn't exist yet.
 
 ## License
 

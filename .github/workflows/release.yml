@@ -56,7 +56,14 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: dist
-      - name: Create the release
+      - name: Create the release, or add the files to it if it was made on GitHub
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "$GITHUB_REF_NAME" dist/* zipapp/wdl-lsp-tools.pyz --repo "$GITHUB_REPOSITORY" --generate-notes
+        run: |
+          files=(dist/* zipapp/wdl-lsp-tools.pyz)
+          if gh release view "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" > /dev/null 2>&1; then
+            # --clobber replaces files of the same name, so a re-run doesn't fail.
+            gh release upload "$GITHUB_REF_NAME" "${files[@]}" --repo "$GITHUB_REPOSITORY" --clobber
+          else
+            gh release create "$GITHUB_REF_NAME" "${files[@]}" --repo "$GITHUB_REPOSITORY" --generate-notes
+          fi
