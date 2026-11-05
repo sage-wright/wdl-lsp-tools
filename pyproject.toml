@@ -1,0 +1,30 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "wdl-lsp-tools"
+dynamic = ["version"]
+description = "Language-server helpers for WDL: ShellCheck and Ruff on command blocks, and a diagnostic filter for Sprocket."
+readme = "README.md"
+license = "BSD-3-Clause"
+license-files = ["LICENSE"]
+authors = [{ name = "Sage Wright", email = "sage.wright@theiagen.com" }]
+requires-python = ">=3.8"
+dependencies = []
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Topic :: Software Development :: Quality Assurance",
+  "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+
+[project.urls]
+Repository = "https://github.com/sage-wright/wdl-lsp-tools"
+"Zed extension" = "https://github.com/sage-wright/zed-wdl"
+
+[project.scripts]
+wdl-command-lint = "wdl_lsp_tools.command_lint:main"
+sprocket-filtered = "wdl_lsp_tools.sprocket_filtered:main"
+
+[tool.hatch.version]
+path = "src/wdl_lsp_tools/__init__.py"
